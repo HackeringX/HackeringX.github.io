@@ -82,7 +82,7 @@ bloomComposer.addPass(bloomPass);
 
 function onClick() {
   const option = document.getElementById("month-name").value;
-  p.setText(options.value);
+  p.setText(options.option);
 }
 
 const loop = () => {
