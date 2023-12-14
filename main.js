@@ -11,18 +11,18 @@ const near = 0.1;
 const far = 1000;
 
 const options = {
-  janvier: "",
-  f: "",
-  jan: "",
-  janier: "",
-  janer: "",
-  janver: "",
-  janver: "",
-  janvir: "",
-  janvie: "",
-  anvier: "",
-  jnvier: "",
-  jer: "",
+  jan: "Dès que tu perdras la peur de l'adversité, tu réussiras.",
+  feb: "Tant que tu ne porteras pas de vernis à ongle, tu ne seras pas trahi.",
+  mar: "Aussitôt que tu commenceras à mediter, tu seras en plein forme.",
+  april: "Tant que tu suivas vertus, tu n'échouras pas.",
+  may: "Lorsque tu verras une lune rouge, tu t'évanouiras.",
+  june: "Lorsque tu trouveras ton allergie, tu me remercieras.",
+  july: "Lorsque les étoiles s'aligneront, tu rencontreras ton jumeau.",
+  aug: "Quand tu résoudras l'énigma de la vie, tu seras transformé.",
+  sep: "Dès que tu trouveras le livre ancien, tu seras guéri.",
+  oct: "Lorsque tu comprendras pourquoi tu existes, tu ressentiras une douleur inconnue.",
+  nov: "Tant que tu te croiras, tu ne perdras jamais.",
+  dec: "Tant que tu seras heureux, tu seras en bonne santé.",
 }
 
 // Scene
