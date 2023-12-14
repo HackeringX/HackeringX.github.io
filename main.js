@@ -80,6 +80,10 @@ bloomComposer.renderToScreen = true;
 bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
+function onClick() {
+  const option = document.getElementById("month-name").value;
+  p.setText(options.value);
+}
 
 const loop = () => {
   renderer.render(scene, camera);
