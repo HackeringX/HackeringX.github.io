@@ -10,13 +10,28 @@ const aspect = window.innerWidth / window.innerHeight;
 const near = 0.1;
 const far = 1000;
 
+const options = {
+  janvier: "",
+  f: "",
+  jan: "",
+  janier: "",
+  janer: "",
+  janver: "",
+  janver: "",
+  janvir: "",
+  janvie: "",
+  anvier: "",
+  jnvier: "",
+  jer: "",
+}
+
 // Scene
 const scene = new THREE.Scene();
 
 // Create orb
 const geometryS = new THREE.SphereGeometry(1, 64, 64);
 const materialS = new THREE.MeshBasicMaterial({
-  color: "#FDB813",
+  color: "#38a9ff",
   transparent: true,
   opacity: 1,
   
