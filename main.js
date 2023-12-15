@@ -1,4 +1,5 @@
 import * as THREE from "./node_modules/three/build/three.module.js";
+import gsap from "gsap";
 import { EffectComposer } from "./node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "./node_modules/three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "./node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js";
@@ -25,19 +26,44 @@ const options = {
   dec: "Tant que tu seras heureux, tu seras en bonne santé.",
 }
 
+gsap.to(".main", {top: "40px", duration: 3, ease: "circ", delay: 1});
+gsap.to(".main", {opacity: 1, duration: 3, ease: "circ", delay: 1.5});
+
 // Scene
 const scene = new THREE.Scene();
 
 // Create orb
-const geometryS = new THREE.SphereGeometry(1, 64, 64);
+const geometryS = new THREE.SphereGeometry(2, 64, 64);
+let [r, g, b] = [56, 169, 255]
 const materialS = new THREE.MeshBasicMaterial({
-  color: "#38a9ff",
+  color: new THREE.Color(`rgb(${r}, ${g}, ${b})`),
   transparent: true,
-  opacity: 1,
+  opacity: 0,
   
 })
 const mesh = new THREE.Mesh(geometryS, materialS);
+mesh.position.z = 5;
+mesh.position.y = -10;
 scene.add(mesh);
+gsap.to(mesh.material, {opacity: 1, duration: 5, ease: "expoScale", delay: 1});
+gsap.to(mesh.position, {y: -2, duration: 4, ease: "expoScale"});
+
+
+// Galaxy geometry
+const starGeometry = new THREE.SphereGeometry(80, 64, 64);
+
+// Galaxy material
+const starMaterial = new THREE.MeshBasicMaterial({
+  map: new THREE.TextureLoader().load("./galaxy1.png"),
+  side: THREE.BackSide,
+  transparent: true,
+  opacity: 1,
+});
+
+// Galaxy mesh
+const starMesh = new THREE.Mesh(starGeometry, starMaterial);
+scene.add(starMesh);
+
 
 // Sizes
 const sizes = {
@@ -80,14 +106,34 @@ bloomComposer.renderToScreen = true;
 bloomComposer.addPass(renderScene);
 bloomComposer.addPass(bloomPass);
 
-function onClick() {
-  const option = document.getElementById("month-name").value;
-  p.setText(options.option);
+document.querySelector(".submit").onclick = function() {click()};
+
+function click() {
+  const val = document.getElementById("month-names").value;
+  document.querySelector(".horoscope").innerHTML = options[val];
+  //console.log(options[val]);
+  const t1 = gsap.timeline();
+  t1.to(".main", {top: "-300px", duration: 2, ease: "circ"});
+  t1.to(mesh.position, {z: 0, duration: 3, ease: "circ"}, "<");
+  t1.to(mesh.position, {y: 0, duration: 3, ease: "circ"}, "<");
+  t1.to(mesh.material.color, {r: Math.random(), duration: 3, ease: "expoScale"});
+  t1.to(mesh.material.color, {g: Math.random(), duration: 3, ease: "expoScale"}, "<");
+  t1.to(mesh.material.color, {g: Math.random(), duration: 3, ease: "expoScale"});
+  t1.to(mesh.material.color, {b: Math.random(), duration: 3, ease: "expoScale"}, "<");
+  t1.to(mesh.material.color, {b: Math.random(), duration: 3, ease: "expoScale"});
+  t1.to(mesh.material.color, {r: Math.random(), duration: 3, ease: "expoScale"}, "<");
+  t1.to(starMesh.material, {opacity: 0, duration: 3, ease: "expoScale"});
+  t1.to(mesh.material, {opacity: 0, duration: 3, ease: "expoScale"}, "<");
+  t1.to(".horoscope", {opacity: 1, duration: 3, ease: "expoScale"});
 }
 
 const loop = () => {
+
+  //mesh.translateY(1);
+
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop);
+  starMesh.rotation.y += 0.001;
   bloomComposer.render();
 }
 
