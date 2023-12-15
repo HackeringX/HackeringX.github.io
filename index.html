@@ -28,12 +28,23 @@
         </select>
       </div>
 
-      <button>Soumettre</button>
+      <a class="submit">
+        <i></i><i></i>
+        <span>SOUMETTRE</span>
+      </a>
 
     </div>
 
-    <p id="horoscope"></p>
+    <p class="horoscope pulsate">HIIIII, how are you?</p>
     
     <script type="module" src="/main.js"></script>
+    <script>
+      let btn = document.querySelector(".submit");
+      btn.addEventListener('mousemove', e=> {
+        let rect = e.target.getBoundingClientRect();
+        let x = e.clientX * 3 - rect.left;
+        btn.style.setProperty('--x', x + 'deg');
+      })
+    </script>
   </body>
 </html>
